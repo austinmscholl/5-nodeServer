@@ -22,9 +22,40 @@ router.post('/', (req, res) => {
             servings: req.body.servings,
             rating: req.body.rating
         }
+
+        Pie.create(pieFromRequest)
+            .then(pie => res.status(200).json(pie))
+            .catch(err => res.json(req.errors))
     } else {
         res.status(500).json(req.errors)
     }
 })
+
+router.get('/:nameOfPie', (req, res) => {
+    Pie.findOne({ where: { nameOfPie: req.params.nameOfPie }})
+      .then(pie => res.status(200).json(pie))
+      .catch(err => res.status(500).json({ error: err}))
+  })
+  
+router.put('/:id', (req, res) => {
+    if (!req.errors) {
+      Pie.update(req.body, { where: { id: req.params.id }})
+        .then(pie => res.status(200).json(pie))
+        .catch(err => res.status(500).json({ error: err}))
+    } else {
+      res.status(500).json(req.errors)
+    }
+  })
+
+router.delete('/:id', (req, res) => {
+    if (!req.errors) {
+        Pie.destroy({ where: { id: req.params.id }})
+            .then(pie => res.status(200).json(pie))
+            .catch(err => res.status(500).json({ error: err }))
+    } else {
+        res.status(500).json(req.errors)
+    }
+})
+
 
 module.exports = router;
