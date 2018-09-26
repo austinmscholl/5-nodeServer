@@ -2,7 +2,7 @@
 const Sequelize = require('sequelize');
 
       //2               //3       //4         //5            //6          
-const sequelize = new Sequelize('workoutlog', 'postgres', 'Postgres!Elevenfifty46280', {
+const sequelize = new Sequelize('workoutlog', 'postgres', 'Postgres!Elevenfifty46280', {        //Postgres!Elevenfifty46280
     host: 'localhost', //7
     dialect: 'postgres'  ///8
 });
