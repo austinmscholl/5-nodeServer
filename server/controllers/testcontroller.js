@@ -26,7 +26,7 @@ router.post('/two', function (req, res) {
 });
 
 router.post('/three', function (req, res) {
-  var testData = req.body.testdata.item;
+  var testData = req.body.item;
 
   TestModel
     .create({
@@ -99,6 +99,26 @@ router.post('/seven', function (req, res) {
 
 router.get('/helloclient', function (req, res) {
   res.send("This is a message from the server to the client.")
+});
+
+/************************
+ * GET:  /one
+ ***********************/
+router.get('/one', function(req, res) {
+
+  TestModel
+    .findAll({ //1
+        attributes: ['id', 'testdata']
+    })
+    .then(
+        function findAllSuccess(data) {
+            console.log("Controller data:", data);
+            res.json(data);
+        },
+        function findAllError(err) {
+            res.send(500, err.message);
+        }
+    );
 });
 
 module.exports = router;
