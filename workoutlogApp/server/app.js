@@ -18,3 +18,5 @@ app.use('/api/log', log)
 app.listen(3000, function(){
     console.log('App is listening on 3000.')
 });
+
+//this is a minor change
